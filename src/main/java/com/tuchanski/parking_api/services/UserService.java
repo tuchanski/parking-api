@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 
 @Service
-public class             UserService {
+public class UserService {
 
     private final UserRepository userRepository;
 
@@ -23,6 +23,13 @@ public class             UserService {
         return userRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("User not found.")
         );
+    }
+
+    @Transactional
+    public User updatePassword(Long id, String password) {
+        User user = getById(id);
+        user.setPassword(password);
+        return user;
     }
 
 }
