@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 
 @RestController
@@ -32,6 +34,12 @@ public class UserController {
     public ResponseEntity<User> updatePassword(@PathVariable Long id, @RequestBody User user) {
         User userUpdated = userService.updatePassword(id, user.getPassword());
         return ResponseEntity.status(HttpStatus.OK).body(userUpdated);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> getAll() {
+        List<User> usersToBeRetrieved = userService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(usersToBeRetrieved);
     }
 
 
