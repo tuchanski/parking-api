@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 
 @Service
-public class UserService {
+public class             UserService {
 
     private final UserRepository userRepository;
 
@@ -17,4 +17,12 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    @Transactional(readOnly = true)
+    public User getById(Long id) {
+        return userRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("User not found.")
+        );
+    }
+
 }
