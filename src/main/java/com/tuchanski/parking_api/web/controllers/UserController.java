@@ -28,9 +28,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Long id) {
+    public ResponseEntity<UserResponseDto> getById(@PathVariable Long id) {
         User userToBeRetrieved = userService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(userToBeRetrieved);
+        return ResponseEntity.status(HttpStatus.OK).body(UserMapper.toDTO(userToBeRetrieved));
     }
 
 
