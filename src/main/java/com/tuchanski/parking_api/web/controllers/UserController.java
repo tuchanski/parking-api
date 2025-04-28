@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -42,9 +43,10 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll() {
-        List<User> usersToBeRetrieved = userService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(usersToBeRetrieved);
+    public ResponseEntity<List<UserResponseDto>> getAll() {
+
+        List<User> users = userService.getAll();
+        return ResponseEntity.status(HttpStatus.OK).body(UserMapper.toListDto(users));
     }
 
 
