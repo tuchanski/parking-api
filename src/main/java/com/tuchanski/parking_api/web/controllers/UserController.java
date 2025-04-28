@@ -3,6 +3,7 @@ package com.tuchanski.parking_api.web.controllers;
 import com.tuchanski.parking_api.entities.User;
 import com.tuchanski.parking_api.services.UserService;
 import com.tuchanski.parking_api.web.dto.UserCreateDto;
+import com.tuchanski.parking_api.web.dto.UserPasswordDto;
 import com.tuchanski.parking_api.web.dto.UserResponseDto;
 import com.tuchanski.parking_api.web.dto.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -35,9 +36,9 @@ public class UserController {
 
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> updatePassword(@PathVariable Long id, @RequestBody User user) {
-        User userUpdated = userService.updatePassword(id, user.getPassword());
-        return ResponseEntity.status(HttpStatus.OK).body(userUpdated);
+    public ResponseEntity<Void> updatePassword(@PathVariable Long id, @RequestBody UserPasswordDto userPasswordDto) {
+        User userUpdated = userService.updatePassword(id, userPasswordDto.getCurrentPassword(), userPasswordDto.getNewPassword(), userPasswordDto.getConfirmPassword());
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
