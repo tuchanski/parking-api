@@ -6,6 +6,7 @@ import com.tuchanski.parking_api.web.dto.UserCreateDto;
 import com.tuchanski.parking_api.web.dto.UserPasswordDto;
 import com.tuchanski.parking_api.web.dto.UserResponseDto;
 import com.tuchanski.parking_api.web.dto.mapper.UserMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> create(@RequestBody UserCreateDto userDto) {
+    public ResponseEntity<UserResponseDto> create(@Valid @RequestBody UserCreateDto userDto) {
 
         User userToBeCreated = userService.save(UserMapper.toUser(userDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toDTO(userToBeCreated));
