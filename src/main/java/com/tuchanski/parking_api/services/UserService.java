@@ -1,6 +1,7 @@
 package com.tuchanski.parking_api.services;
 
 import com.tuchanski.parking_api.entities.User;
+import com.tuchanski.parking_api.exception.EntityNotFoundException;
 import com.tuchanski.parking_api.exception.UsernameUniqueViolationException;
 import com.tuchanski.parking_api.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public User getById(Long id) {
         return userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("User not found.")
+                () -> new EntityNotFoundException(String.format("User with id %s not found", id))
         );
     }
 
