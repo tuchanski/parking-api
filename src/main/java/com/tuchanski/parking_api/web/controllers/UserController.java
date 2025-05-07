@@ -55,7 +55,8 @@ public class UserController {
             @ApiResponse(responseCode = "204", description = "Password updated successfully.",
                     content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "404", description = "Resource not found.", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Passwords do not match.", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "400", description = "Passwords do not match.", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "422", description = "Invalid fields.", content = @Content(mediaType = "application/json"))
     })
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updatePassword(@PathVariable Long id, @Valid @RequestBody UserPasswordDto userPasswordDto) {
